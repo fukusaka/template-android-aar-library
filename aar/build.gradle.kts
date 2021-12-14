@@ -1,8 +1,12 @@
 plugins {
     id("com.android.library")
     kotlin("android")
+    id("org.jetbrains.dokka") version "1.6.0"
+    id("maven-publish")
 }
 
+group = "org.example"
+version = "1.0-SNAPSHOT"
 
 android {
     compileSdk = 31
@@ -52,3 +56,37 @@ dependencies {
     androidTestImplementation("androidx.test.ext:junit:1.1.3")
     androidTestImplementation("androidx.test.espresso:espresso-core:3.4.0")
 }
+
+tasks {
+    val sourcesJar by registering(Jar::class) {
+        group = "build"
+        archiveClassifier.set("sources")
+        from(android.sourceSets.getByName("main").java.srcDirs)
+    }
+
+    dokkaJavadoc {
+        outputDirectory.set(file("$buildDir/javadoc"))
+    }
+
+    val androidJavadocsJar by registering(Jar::class) {
+        group = "build"
+        archiveClassifier.set("javadoc")
+        dependsOn("dokkaJavadoc")
+        from("$buildDir/javadoc")
+    }
+}
+
+afterEvaluate {
+    publishing {
+        // repositories { UtilsKt.outputMavenGitHubPackages(it, project) }
+        publications {
+            register<MavenPublication>("releaseAar") {
+                from(components["release"])
+                artifact(tasks["androidJavadocsJar"])
+                artifact(tasks["sourcesJar"])
+                artifactId = "hello-aar"
+            }
+        }
+    }
+}
+
