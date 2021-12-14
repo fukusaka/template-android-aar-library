@@ -12,6 +12,9 @@ android {
         targetSdk = 31
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+        testInstrumentationRunnerArguments += mapOf(
+            "clearPackageData" to "true"
+        )
     }
 
     buildTypes {
@@ -27,6 +30,10 @@ android {
     kotlinOptions {
         jvmTarget = "11"
     }
+
+    testOptions {
+        execution = "ANDROIDX_TEST_ORCHESTRATOR"
+    }
 }
 
 dependencies {
@@ -41,6 +48,7 @@ dependencies {
     testImplementation("junit:junit:4.13.2")
 
     // Android Test
+    androidTestUtil("androidx.test:orchestrator:1.4.1")
     androidTestImplementation("androidx.test.ext:junit:1.1.3")
     androidTestImplementation("androidx.test.espresso:espresso-core:3.4.0")
 }
