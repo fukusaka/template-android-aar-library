@@ -87,6 +87,21 @@ afterEvaluate {
                 artifactId = "hello-aar"
             }
         }
+
+        repositories {
+            val uploadMavenUser = project.findPropertyAsString("uploadMavenUser")
+            val uploadMavenPassword = project.findPropertyAsString("uploadMavenPassword")
+
+            if (uploadMavenUser != null && uploadMavenPassword != null) {
+                maven {
+                    name = "GitHubPackages"
+                    url = uri("https://maven.pkg.github.com/fukusaka/template-android-aar-library")
+                    credentials {
+                        username = uploadMavenUser
+                        password = uploadMavenPassword
+                    }
+                }
+            }
+        }
     }
 }
-
