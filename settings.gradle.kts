@@ -18,5 +18,4 @@ dependencyResolutionManagement {
 
 rootProject.name = "template-android-aar-library"
 
-include(":app")
 include(":aar")
