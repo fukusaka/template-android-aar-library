@@ -58,7 +58,7 @@ dependencies {
 }
 
 tasks {
-    val sourcesJar by registering(Jar::class) {
+    val androidSourcesJar by registering(Jar::class) {
         group = "build"
         archiveClassifier.set("sources")
         from(android.sourceSets.getByName("main").java.srcDirs)
@@ -78,12 +78,13 @@ tasks {
 
 afterEvaluate {
     publishing {
+
         // repositories { UtilsKt.outputMavenGitHubPackages(it, project) }
         publications {
             register<MavenPublication>("releaseAar") {
                 from(components["release"])
                 artifact(tasks["androidJavadocsJar"])
-                artifact(tasks["sourcesJar"])
+                // artifact(tasks["sourcesJar"]) // どこかのバージョンで aar でもソースが取り込まれる対応が入ったのか。
                 artifactId = "hello-aar"
             }
         }
