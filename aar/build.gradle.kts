@@ -14,6 +14,7 @@ android {
 
     defaultConfig {
         minSdk = 24
+        // noinspection ExpiredTargetSdkVersion
         targetSdk = 31
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
@@ -43,19 +44,19 @@ android {
 
 dependencies {
     // AndroidX
-    implementation("androidx.core:core-ktx:1.7.0")
-    implementation("androidx.appcompat:appcompat:1.4.0")
+    implementation(libs.core.ktx)
+    implementation(libs.appcompat)
 
     // Material Design
-    implementation("com.google.android.material:material:1.4.0")
+    implementation(libs.android.material)
 
     // Unit Test
-    testImplementation("junit:junit:4.13.2")
-
+    implementation(libs.junit)
+    
     // Android Test
-    androidTestUtil("androidx.test:orchestrator:1.4.1")
-    androidTestImplementation("androidx.test.ext:junit:1.1.3")
-    androidTestImplementation("androidx.test.espresso:espresso-core:3.4.0")
+    androidTestUtil(libs.androidx.test.orchestrator)
+    androidTestImplementation(libs.androidx.test.ext.junit)
+    androidTestImplementation(libs.androidx.test.espresso)
 }
 
 tasks {
