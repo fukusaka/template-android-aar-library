@@ -9,6 +9,7 @@ group = "org.example"
 version = "1.0-SNAPSHOT"
 
 android {
+    namespace = "com.example.android.aar"
     compileSdk = 31
 
     defaultConfig {
