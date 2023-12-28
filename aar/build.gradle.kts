@@ -10,7 +10,7 @@ version = "1.0-SNAPSHOT"
 
 android {
     namespace = "com.example.android.aar"
-    compileSdk = 31
+    compileSdk = 34
 
     defaultConfig {
         minSdk = 24
