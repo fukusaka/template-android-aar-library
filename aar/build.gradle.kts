@@ -65,8 +65,8 @@ dependencies {
 
 android {
     publishing {
-        // AGP7.1からソースJAR/Javadoc JARの公開をサポートのため、バリアントを指定
-        singleVariant("release") {
+        multipleVariants {
+            allVariants()
             withSourcesJar()
             withJavadocJar()
         }
@@ -76,7 +76,7 @@ android {
 publishing {
     publications {
         register<MavenPublication>("releaseAar") {
-            afterEvaluate { from(components["release"]) }
+            afterEvaluate { from(components["default"]) }
             artifactId = "hello-aar"
         }
     }
