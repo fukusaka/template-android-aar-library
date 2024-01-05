@@ -41,6 +41,7 @@ android {
         jvmTarget = "11"
     }
 
+    @Suppress("UnstableApiUsage")
     testOptions {
         execution = "ANDROIDX_TEST_ORCHESTRATOR"
     }
