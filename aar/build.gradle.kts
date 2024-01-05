@@ -15,6 +15,12 @@ android {
     defaultConfig {
         minSdk = 24
 
+        aarMetadata {
+            minCompileSdk = 29 // AGP4.1 から利用側の最小 compileSdk を指定できる
+            @Suppress("UnstableApiUsage")
+            minAgpVersion = "7.1.0" // AGP7.1 から利用側の最小 AGP を指定できる
+        }
+
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
         testInstrumentationRunnerArguments += mapOf(
             "clearPackageData" to "true"
