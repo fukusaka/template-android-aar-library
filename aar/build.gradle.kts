@@ -72,17 +72,10 @@ android {
     }
 }
 
-tasks {
-    dokkaJavadoc {
-        outputDirectory.set(file("$buildDir/javadoc"))
-    }
-
-    val androidJavadocsJar by registering(Jar::class) {
-        group = "build"
-        archiveClassifier.set("javadoc")
-        dependsOn("dokkaJavadoc")
-        from("$buildDir/javadoc")
-    }
+tasks.register<Jar>("androidJavadocsJar") {
+    dependsOn(tasks.dokkaJavadoc)
+    from(tasks.dokkaJavadoc.flatMap { it.outputDirectory })
+    archiveClassifier.set("javadoc")
 }
 
 afterEvaluate {
