@@ -13,4 +13,4 @@ template-android-aar-library
 * [Gradle User Manual](https://docs.gradle.org/current/userguide/userguide.html)
 * [GitHub Actions](https://docs.github.com/ja/actions)
 * [GitHub Packages](https://docs.github.com/ja/packages)
-* [Use the Maven Publish plugin](https://developer.android.com/studio/build/maven-publish-plugin)
+* [Publish your library](https://developer.android.com/build/publish-library)
