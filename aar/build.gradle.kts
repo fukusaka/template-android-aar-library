@@ -63,13 +63,16 @@ dependencies {
     androidTestImplementation(libs.androidx.test.espresso)
 }
 
-tasks {
-    val androidSourcesJar by registering(Jar::class) {
-        group = "build"
-        archiveClassifier.set("sources")
-        from(android.sourceSets.getByName("main").java.srcDirs)
+android {
+    publishing {
+        // AGP7.1からソースJARの公開をサポートのため、バリアントを指定
+        singleVariant("release") {
+            withSourcesJar()
+        }
     }
+}
 
+tasks {
     dokkaJavadoc {
         outputDirectory.set(file("$buildDir/javadoc"))
     }
@@ -90,7 +93,6 @@ afterEvaluate {
             register<MavenPublication>("releaseAar") {
                 from(components["release"])
                 artifact(tasks["androidJavadocsJar"])
-                // artifact(tasks["sourcesJar"]) // どこかのバージョンで aar でもソースが取り込まれる対応が入ったのか。
                 artifactId = "hello-aar"
             }
         }
