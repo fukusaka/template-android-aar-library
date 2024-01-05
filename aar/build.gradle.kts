@@ -65,24 +65,18 @@ dependencies {
 
 android {
     publishing {
-        // AGP7.1からソースJARの公開をサポートのため、バリアントを指定
+        // AGP7.1からソースJAR/Javadoc JARの公開をサポートのため、バリアントを指定
         singleVariant("release") {
             withSourcesJar()
+            withJavadocJar()
         }
     }
-}
-
-tasks.register<Jar>("androidJavadocsJar") {
-    dependsOn(tasks.dokkaJavadoc)
-    from(tasks.dokkaJavadoc.flatMap { it.outputDirectory })
-    archiveClassifier.set("javadoc")
 }
 
 publishing {
     publications {
         register<MavenPublication>("releaseAar") {
             afterEvaluate { from(components["release"]) }
-            artifact(tasks["androidJavadocsJar"])
             artifactId = "hello-aar"
         }
     }
