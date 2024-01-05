@@ -66,6 +66,10 @@ dependencies {
 
 android {
     publishing {
+        singleVariant("release") {
+            withSourcesJar()
+            withJavadocJar()
+        }
         multipleVariants {
             allVariants()
             withSourcesJar()
@@ -76,7 +80,8 @@ android {
 
 publishing {
     publications {
-        register<MavenPublication>("releaseAar") {
+        register<MavenPublication>("Aar") {
+            // afterEvaluate { from(components["release"]) } // release のみ公開する
             afterEvaluate { from(components["default"]) }
             artifactId = "hello-aar"
         }
